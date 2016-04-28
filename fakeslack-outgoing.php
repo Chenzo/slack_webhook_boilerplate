@@ -11,7 +11,7 @@ include 'config.php';
 
         <p>Fake Outgoing Page For Testing...</p>
 
-        <form action="fromslack.php" method="post">
+        <form action="fromslack.php?v=123456&r=y" method="post">
             <label for="name">Slash Command Parameters: </label>
             <input type="text" id="test" name="text" />
 

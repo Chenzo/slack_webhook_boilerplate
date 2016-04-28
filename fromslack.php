@@ -1,17 +1,20 @@
 <?php 
 include 'config.php';
+require_once('includes/helpers.class.php');
 
 /*
 Need to set the header to content-type header of the response must match the disposition of your content, application/json.
 */
 header('Content-Type: application/json');
 
-
-
+$id =  isset($_GET['v']) ? $_GET['v'] : "";
+$r = isset($_GET['r']) ? $_GET['r'] : "";
 
 $token = $_POST["token"];
 $theCommand = $_POST["text"];
 
+
+$rs = $helpers->generateRandomString();
 /*
 
 This is what's posted...
@@ -45,7 +48,7 @@ This is the JSON we should send back:
 }
 */
 
-
+echo $rs;
 
 
 class Attachms {

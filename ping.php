@@ -58,7 +58,7 @@ $theMessage->fields = array(array(
 							"value" => "<" . REMOTE_HOST . "ping.php|ping>")
 						);
 
-//echo json_encode(array("attachments" => array($theMessage))); //, JSON_UNESCAPED_SLASHES
+echo json_encode(array("attachments" => array($theMessage))); //JSON_UNESCAPED_SLASHES
 
 
 function sendIt($theMessage) {
@@ -66,9 +66,8 @@ function sendIt($theMessage) {
 	$ch = curl_init( WEBHOOK_URL );
 	curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
 	curl_setopt( $ch, CURLOPT_POST, true );
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt( $ch, CURLOPT_POSTFIELDS, $theMessage );
-	$cResult = curl_exec( $ch );
+	curl_exec( $ch );
 	curl_close( $ch );
 
 }
