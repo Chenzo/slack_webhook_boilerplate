@@ -8,7 +8,7 @@ Basic bot code for Slack. (written in .php)
 
 ## Set Up
 
-Edit config.php and add you own hooks:
+Rename config.example.php to config.php and then edit it to add you own hooks:
 
 define('WEBHOOK_URL','**[YOUR URL HERE]**');   
 define('SLASH_TOKEN','**[YOUR TOKEN HERE]**');
