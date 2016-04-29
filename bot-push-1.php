@@ -1,16 +1,19 @@
 <?php
 include 'config.php';
+require_once('slack.class.php');
 header('Content-Type: application/json');
+
+
 
 class Attachms {
 	public $fallback = "";
 	public $pretext = "";
+	public $mrkdwn_in = array("text", "fields");
 	public $color = "";
 	public $thumb_url = "";
 	//public $image_url = "";
 	public $fields;
-	public $mrkdwn_in = ["text", "fields"];
-	//public $channel;
+	
 }
 
 /*
@@ -48,7 +51,7 @@ $theMessage->thumb_url = REMOTE_HOST . "rocket_league-badge.png";
 //$theMessage->image_url = "http://1stdigitalinfantry.com/images/placeholder.jpg";
 $theMessage->fields = array(array(
                         "title" => "Notes",
-		               "value" => "Channel Link #general",
+		               "value" => "Channel Link <#general>",
 		               "short" => false),
 						array(
 							"title" => "This is bold already",
@@ -58,22 +61,9 @@ $theMessage->fields = array(array(
 							"value" => "<" . REMOTE_HOST . "ping.php|ping>")
 						);
 
-//echo json_encode(array("attachments" => array($theMessage))); //, JSON_UNESCAPED_SLASHES
 
+	$jsonMessage = json_encode(array("channel" => "#twb", "attachments" => array($theMessage))); //, JSON_UNESCAPED_SLASHES
 
-function sendIt($theMessage) {
-
-	$ch = curl_init( WEBHOOK_URL );
-	curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
-	curl_setopt( $ch, CURLOPT_POST, true );
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt( $ch, CURLOPT_POSTFIELDS, $theMessage );
-	$cResult = curl_exec( $ch );
-	curl_close( $ch );
-
-}
-
-
-sendIt(json_encode($theMessage)); //JSON_UNESCAPED_SLASHES
+    $slack->sendIt(WEBHOOK_URL, $jsonMessage, false);
 
 ?>
